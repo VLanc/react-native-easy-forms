@@ -1,20 +1,15 @@
 // @flow
 import React, { PureComponent } from 'react';
 import {
-  Item, Input, Label, Form, Content,
+  Form, Content,
 } from 'native-base';
 
-import { StyleSheet } from 'react-native';
 import SwitchItem from './SwitchItem';
-
-const styles = StyleSheet.create({
-  formLabel: {
-    color: '#000',
-  },
-});
+import InputItem from './InputItem';
+import SelectItem from './SelectItem';
 
 export default class RNFormsConstructor extends PureComponent {
-  static defaultProps = {
+/*  static defaultProps = {
     type: 'input',
     label: '',
     placeholder: '',
@@ -22,7 +17,7 @@ export default class RNFormsConstructor extends PureComponent {
     isRequired: false,
     isEmail: false,
     isPassword: false,
-  };
+  }; */
 
   render() {
     const { fields } = this.props;
@@ -34,17 +29,11 @@ export default class RNFormsConstructor extends PureComponent {
             switch (field.type) {
               case 'input':
                 return (
-                  <Item
+                  <InputItem
                     key={field.id}
-                    stackedLabel
-                  >
-                    <Label style={styles.formLabel}>{field.label}</Label>
-                    <Input
-                      secureTextEntry={field.isPassword}
-                      placeholder={field.placeholder}
-                      maxLength={field.maxLength || 50}
-                    />
-                  </Item>);
+                    {...field}
+                  />
+                );
               case 'switch':
                 return (
                   <SwitchItem
@@ -52,6 +41,13 @@ export default class RNFormsConstructor extends PureComponent {
                     defaultValue={field.defaultValue}
                     label={field.label}
                     onValueChange={field.onValueChange}
+                  />
+                );
+              case 'select':
+                return (
+                  <SelectItem
+                    key={field.id}
+                    {...field}
                   />
                 );
               default:

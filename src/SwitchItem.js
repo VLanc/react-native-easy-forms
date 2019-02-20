@@ -3,8 +3,16 @@ import React, { Component } from 'react';
 import {
   Text,
   Switch,
+  StyleSheet,
 } from 'react-native';
 import { Item, Left, Right } from 'native-base';
+
+const styles = StyleSheet.create({
+  wrapper: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+});
 
 export default class SwitchItem extends Component {
   static defaultProps = {
@@ -32,7 +40,7 @@ export default class SwitchItem extends Component {
     const { value } = this.state;
 
     return (
-      <Item>
+      <Item style={styles.wrapper}>
         <Left>
           <Text>{label}</Text>
         </Left>
